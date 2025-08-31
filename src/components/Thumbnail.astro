@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { Painting } from "../data";
 import { getUrl } from "../util";
 
@@ -8,14 +9,14 @@ interface Props {
 }
 
 const { painting, class: className, ...rest } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/paintings/**/*"
+);
+const image = images["/src/assets" + painting.images.thumbnail];
 ---
 
 <a class:list={["thumbnail", className]} href={getUrl(painting.slug)} {...rest}>
-  <img
-    class="thumbnail__image"
-    src={getUrl(painting.images.thumbnail)}
-    alt={painting.name}
-  />
+  <Image class="thumbnail__image" src={image()} alt={painting.name} priority />
   <div class="thumbnail__content">
     <h2 class="thumbnail__title">{painting.name}</h2>
     <p class="thumbnail__artist">{painting.artist.name}</p>
