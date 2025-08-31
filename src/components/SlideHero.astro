@@ -1,5 +1,6 @@
 ---
 import type { Painting } from "../data";
+import { getUrl } from "../util";
 
 type Props = {
   data: Painting;
@@ -15,10 +16,13 @@ const { data } = Astro.props;
 <div class="hero">
   <div class="hero__painting">
     <picture>
-      <source srcset={data.images.hero.large} media="(min-width: 48em)" />
+      <source
+        srcset={getUrl(data.images.hero.large)}
+        media="(min-width: 48em)"
+      />
       <img
         class="hero__painting image"
-        src={data.images.hero.small}
+        src={getUrl(data.images.hero.small)}
         alt={data.name}
       />
     </picture>
@@ -40,7 +44,7 @@ const { data } = Astro.props;
     <p class="hero__artist">{data.artist.name}</p>
   </div>
   <div class="hero__portrait">
-    <img class="image" src={data.artist.image} alt={data.artist.name} />
+    <img class="image" src={getUrl(data.artist.image)} alt={data.artist.name} />
   </div>
   <svg width="0" height="0" class="hidden">
     <symbol

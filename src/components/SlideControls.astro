@@ -1,6 +1,6 @@
 ---
 import type { Painting } from "../data";
-import { formHref } from "../util";
+import { getUrl } from "../util";
 
 type Props = {
   data: Painting;
@@ -22,7 +22,7 @@ const { data } = Astro.props;
         "controls__button--back",
         { disabled: !data.prev },
       ]}
-      href={formHref(data.prev?.slug)}
+      href={getUrl(data.prev?.slug)}
       aria-hidden={!data.prev}
     >
       <span class="sr-only">Go to the previous slide</span>
@@ -34,7 +34,7 @@ const { data } = Astro.props;
         "controls__button--next",
         { disabled: !data.next },
       ]}
-      href={formHref(data.next?.slug)}
+      href={getUrl(data.next?.slug)}
       aria-hidden={!data.next}
     >
       <span class="sr-only">Go to the next slide</span>

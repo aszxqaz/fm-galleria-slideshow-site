@@ -1,6 +1,6 @@
 ---
 import type { Painting } from "../data";
-import { formHref } from "../util";
+import { getUrl } from "../util";
 
 interface Props {
   painting: Painting;
@@ -10,11 +10,7 @@ interface Props {
 const { painting, class: className, ...rest } = Astro.props;
 ---
 
-<a
-  class:list={["thumbnail", className]}
-  href={formHref(painting.slug)}
-  {...rest}
->
+<a class:list={["thumbnail", className]} href={getUrl(painting.slug)} {...rest}>
   <img
     class="thumbnail__image"
     src={painting.images.thumbnail}

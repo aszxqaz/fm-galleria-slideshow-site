@@ -1,5 +1,5 @@
 ---
-import { formHref } from "../util";
+import { getUrl } from "../util";
 
 const { class: className, ...props } = Astro.props;
 ---
@@ -8,7 +8,7 @@ const { class: className, ...props } = Astro.props;
   <div class="header__row">
     <img
       class="header__logo"
-      src={formHref("/images/shared/logo.svg")}
+      src={getUrl("/images/shared/logo.svg")}
       alt="Galleria logo"
     />
     <slot />

@@ -3,7 +3,7 @@ import Header from "../components/Header.astro";
 import Thumbnail from "../components/Thumbnail.astro";
 import paintings from "../data";
 import PageLayout from "../layouts/PageLayout.astro";
-import { formHref } from "../util";
+import { getUrl } from "../util";
 
 const pageTitle = "Frontend Mentor | Galleria slideshow site";
 ---
@@ -11,7 +11,7 @@ const pageTitle = "Frontend Mentor | Galleria slideshow site";
 <PageLayout pageTitle={pageTitle}>
   <Header>
     <a
-      href={formHref(paintings[0].slug)}
+      href={getUrl(paintings[0].slug)}
       class="header__anchor text-button text-button--mq">Start slideshow</a
     >
   </Header>

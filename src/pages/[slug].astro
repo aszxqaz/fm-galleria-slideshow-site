@@ -6,7 +6,7 @@ import SlideControls from "../components/SlideControls.astro";
 import SlideHero from "../components/SlideHero.astro";
 import paintings from "../data";
 import PageLayout from "../layouts/PageLayout.astro";
-import { formHref } from "../util";
+import { getUrl } from "../util";
 
 export async function getStaticPaths() {
   return paintings.map((painting, i) => ({
@@ -40,7 +40,7 @@ const pageTitle = `Frontend Mentor | Galleria slideshow site`;
     }
   </Fragment>
   <Header>
-    <a href={formHref("")} class="header__anchor text-button text-button--mq"
+    <a href={getUrl("")} class="header__anchor text-button text-button--mq"
       >Stop slideshow</a
     >
   </Header>
