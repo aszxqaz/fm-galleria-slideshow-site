@@ -74,13 +74,11 @@ const { data } = Astro.props;
 
     openBtn.addEventListener("click", () => {
       document.body.classList.add("no-scroll");
-      document.body.classList.add("color-overlay");
       gallery.classList.add("opened");
     });
 
     closeBtn.addEventListener("click", () => {
       gallery.classList.remove("opened");
-      document.body.classList.remove("color-overlay");
       document.body.classList.remove("no-scroll");
     });
   });
