@@ -35,6 +35,11 @@ const pageTitle = `Frontend Mentor | Galleria slideshow site`;
             href={getUrl(data.next.images.hero.small)}
             as="image"
           />
+          <link
+            rel="prefetch"
+            href={getUrl(data.next.artist.image)}
+            as="image"
+          />
         </Fragment>
       ) : null
     }
@@ -49,6 +54,11 @@ const pageTitle = `Frontend Mentor | Galleria slideshow site`;
           <link
             rel="prefetch"
             href={getUrl(data.prev.images.hero.small)}
+            as="image"
+          />
+          <link
+            rel="prefetch"
+            href={getUrl(data.prev.artist.image)}
             as="image"
           />
         </Fragment>
