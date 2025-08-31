@@ -1,16 +1,13 @@
 ---
 import { getUrl } from "../util";
+import Logo from "../assets/images/shared/logo.svg";
 
 const { class: className, ...props } = Astro.props;
 ---
 
 <header class:list={["header", className]} {...props}>
   <div class="header__row">
-    <img
-      class="header__logo"
-      src={getUrl("/images/shared/logo.svg")}
-      alt="Galleria logo"
-    />
+    <Logo class="header__logo" />
     <slot />
   </div>
 </header>
