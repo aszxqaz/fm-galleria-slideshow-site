@@ -22,5 +22,5 @@
 }
 
 .dark {
-  color-scheme: dark;
+  background-color: var(--color-neutral-900);
 }
