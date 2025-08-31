@@ -25,16 +25,32 @@ const pageTitle = `Frontend Mentor | Galleria slideshow site`;
     {
       data.next ? (
         <Fragment>
-          <link rel="prefetch" href={data.next.images.hero.large} as="image" />
-          <link rel="prefetch" href={data.next.images.hero.small} as="image" />
+          <link
+            rel="prefetch"
+            href={getUrl(data.next.images.hero.large)}
+            as="image"
+          />
+          <link
+            rel="prefetch"
+            href={getUrl(data.next.images.hero.small)}
+            as="image"
+          />
         </Fragment>
       ) : null
     }
     {
       data.prev ? (
         <Fragment>
-          <link rel="prefetch" href={data.prev.images.hero.large} as="image" />
-          <link rel="prefetch" href={data.prev.images.hero.small} as="image" />
+          <link
+            rel="prefetch"
+            href={getUrl(data.prev.images.hero.large)}
+            as="image"
+          />
+          <link
+            rel="prefetch"
+            href={getUrl(data.prev.images.hero.small)}
+            as="image"
+          />
         </Fragment>
       ) : null
     }
