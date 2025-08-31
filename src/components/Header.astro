@@ -1,4 +1,6 @@
 ---
+import { formHref } from "../util";
+
 const { class: className, ...props } = Astro.props;
 ---
 
@@ -6,7 +8,7 @@ const { class: className, ...props } = Astro.props;
   <div class="header__row">
     <img
       class="header__logo"
-      src="/images/shared/logo.svg"
+      src={formHref("/images/shared/logo.svg")}
       alt="Galleria logo"
     />
     <slot />
