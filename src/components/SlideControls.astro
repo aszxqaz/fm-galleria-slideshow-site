@@ -140,6 +140,18 @@ const { data } = Astro.props;
       --w: 1.573125rem;
       --h: 1.5rem;
     }
+
+    @media (hover: hover) {
+      &:not(:disabled):not(.disabled) {
+        &::after {
+          transition: background-color 0.3s;
+        }
+
+        &:hover::after {
+          background-color: var(--color-neutral-200);
+        }
+      }
+    }
   }
 
   .controls__button--back::after {

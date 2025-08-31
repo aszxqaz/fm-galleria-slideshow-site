@@ -139,6 +139,14 @@ const { data } = Astro.props;
     margin-inline-end: -1em;
     text-transform: uppercase;
     align-self: flex-end;
+
+    @media (hover: hover) {
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.25;
+      }
+    }
   }
 
   .gallery__image {
@@ -177,6 +185,14 @@ const { data } = Astro.props;
       top: unset;
       bottom: 1rem;
     }
+
+    @media (hover: hover) {
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: rgb(255 255 255 / 0.2522);
+      }
+    }
   }
 
   .hero__view-button {
@@ -210,13 +226,14 @@ const { data } = Astro.props;
   .hero__body {
     margin-block-start: -3.5rem;
 
-    background-color: var(--color-neutral-0);
-    width: max(17.625rem, 60%);
     padding: 1.4rem 1.5rem;
+    width: max(17.625rem, 60%);
+
+    background-color: var(--color-neutral-0);
 
     @media (min-width: 48em) {
       margin-block-start: 0;
-
+      max-width: unset;
       width: 27.8125rem;
       padding: 0 0 4rem 4rem;
       margin-left: auto;
@@ -242,6 +259,7 @@ const { data } = Astro.props;
     line-height: 1.25;
     text-wrap: balance;
     color: var(--color-neutral-900);
+    text-wrap: balance;
 
     @media (min-width: 48em) {
       margin-block-end: 1.5rem;
