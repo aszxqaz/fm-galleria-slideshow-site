@@ -10,9 +10,14 @@
     rgb(0 0 0 / 0),
     rgb(0 0 0 / 0.84)
   );
+  --color-modal-overlay: rgb(0 0 0 / 0.8539);
 }
 
 body {
   color: var(--color-neutral-400);
   background-color: var(--color-neutral-0);
+}
+
+.color-overlay {
+  color: var(--color-modal-overlay);
 }
