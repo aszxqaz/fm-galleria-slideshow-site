@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("/fonts/LibreBaskerville/LibreBaskerville-Regular.woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("/fonts/LibreBaskerville/LibreBaskerville-Bold.woff2");
+  font-weight: 700;
+}
+
+:root {
+  --fw-bold: 700;
+  --fw-regular: 400;
+}
+
+body {
+  font-synthesis: none;
+  font-family: "Libre Baskerville", serif;
+}

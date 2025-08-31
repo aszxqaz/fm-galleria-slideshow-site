@@ -1,0 +1,161 @@
+---
+import type { Painting } from "../data";
+import { formHref } from "../util";
+
+type Props = {
+  data: Painting;
+};
+
+const { data } = Astro.props;
+---
+
+<aside class="controls" style={`--step: ${data.index + 1}`}>
+  <div class="controls__info">
+    <span class="controls__title">{data.name}</span>
+    <span class="controls__artist">{data.artist.name}</span>
+  </div>
+  <div class="controls__button-group">
+    <a
+      data-astro-prefetch="load"
+      class:list={[
+        "controls__button",
+        "controls__button--back",
+        { disabled: !data.prev },
+      ]}
+      href={formHref(data.prev?.slug)}
+      aria-hidden={!data.prev}
+    >
+      <span class="sr-only">Go to the previous slide</span>
+    </a>
+    <a
+      data-astro-prefetch="load"
+      class:list={[
+        "controls__button",
+        "controls__button--next",
+        { disabled: !data.next },
+      ]}
+      href={formHref(data.next?.slug)}
+      aria-hidden={!data.next}
+    >
+      <span class="sr-only">Go to the next slide</span>
+    </a>
+  </div>
+</aside>
+
+<style>
+  .controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .controls {
+    padding: 1rem 1.5rem;
+    border-block-start-width: 1px;
+    border-block-start-style: solid;
+    border-image: linear-gradient(
+        to right,
+        var(--color-neutral-900) calc(var(--step) / 15 * 100%),
+        var(--color-neutral-150) calc(var(--step) / 15 * 100%)
+      )
+      1;
+    background-color: var(--color-neutral-0);
+    user-select: none;
+
+    @media (min-width: 48em) {
+      padding: 1.5rem 2.5rem;
+    }
+  }
+
+  .controls__info {
+    display: grid;
+
+    @media (min-width: 48em) {
+      gap: 0.5rem;
+    }
+  }
+
+  .controls__title {
+    font-size: 0.875rem;
+    font-weight: var(--fw-bold);
+    line-height: 1.25;
+    letter-spacing: -0.0178571428571429em;
+    color: var(--color-neutral-900);
+
+    @media (min-width: 48em) {
+      font-size: 1.125rem;
+      letter-spacing: 0;
+    }
+  }
+
+  .controls__artist {
+    font-size: 0.625rem;
+    font-weight: var(--fw-regular);
+    line-height: 1.2;
+    color: var(--color-neutral-900);
+    opacity: 0.7528;
+
+    @media (min-width: 48em) {
+      font-size: 0.8125rem;
+      line-height: 1.25;
+    }
+  }
+
+  .controls__button {
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+
+    --w: 1.04875rem;
+    --h: 1rem;
+
+    &::after {
+      content: "";
+      width: var(--w);
+      height: var(--h);
+      mask-size: var(--w) var(--h);
+      mask-position: center;
+      mask-repeat: no-repeat;
+      background-color: var(--color-neutral-900);
+    }
+
+    &.disabled {
+      opacity: 0.15;
+    }
+
+    @media (min-width: 48em) {
+      width: 2.5rem;
+      height: 2.5rem;
+
+      --w: 1.573125rem;
+      --h: 1.5rem;
+    }
+  }
+
+  .controls__button--back::after {
+    mask-image: url("../../../images/shared/icon-back-button.svg");
+  }
+
+  .controls__button--next::after {
+    mask-image: url("../../../images/shared/icon-next-button.svg");
+  }
+
+  .controls__button-group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    @media (min-width: 48em) {
+      gap: 2.5rem;
+    }
+  }
+</style>

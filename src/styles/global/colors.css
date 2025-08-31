@@ -1,0 +1,21 @@
+:root {
+  --color-neutral-0: rgb(255, 255, 255);
+  --color-neutral-100: rgb(243, 243, 243);
+  --color-neutral-150: rgb(229, 229, 229);
+  --color-neutral-200: rgb(216, 216, 216);
+  --color-neutral-400: rgb(125, 125, 125);
+  --color-neutral-900: rgb(0, 0, 0);
+  --thumbnail-overlay-gradient: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0),
+    rgb(0 0 0 / 0.84)
+  );
+}
+
+body {
+  color: var(--color-neutral-400);
+}
+
+.n-0 {
+  color: var(--color-neutral-0);
+}

@@ -1,0 +1,267 @@
+---
+import type { Painting } from "../data";
+
+type Props = {
+  data: Painting;
+};
+const { data } = Astro.props;
+
+// const images = import.meta.glob<{ default: ImageMetadata }>(
+//   "/src/assets/images/paintings/**/*"
+// );
+// const heroLarge = images["/src/assets" + data.images.hero.large];
+---
+
+<div class="hero">
+  <div class="hero__painting">
+    <picture>
+      <source srcset={data.images.hero.large} media="(min-width: 48em)" />
+      <img
+        class="hero__painting image"
+        src={data.images.hero.small}
+        alt={data.name}
+      />
+    </picture>
+    <button id="gallery-button-open" class="hero__view-button">
+      <svg width="12" height="12">
+        <use xlink:href="#icon-view"></use>
+      </svg>
+      <span>View Image</span>
+    </button>
+    <div id="gallery" class="gallery">
+      <div class="gallery__container gallery__group">
+        <button id="gallery-button-close" class="gallery__close">Close</button>
+        <img class="gallery__image" src={data.images.gallery} alt={data.name} />
+      </div>
+    </div>
+  </div>
+  <div class="hero__body">
+    <h1 class="hero__title">{data.name}</h1>
+    <p class="hero__artist">{data.artist.name}</p>
+  </div>
+  <div class="hero__portrait">
+    <img class="image" src={data.artist.image} alt={data.artist.name} />
+  </div>
+  <svg width="0" height="0" class="hidden">
+    <symbol
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 12 12"
+      id="icon-view"
+    >
+      <g fill="currentColor" fill-rule="nonzero">
+        <path
+          d="M7.714 0l1.5 1.5-2.357 2.357 1.286 1.286L10.5 2.786l1.5 1.5V0zM3.857 6.857L1.5 9.214 0 7.714V12h4.286l-1.5-1.5 2.357-2.357zM8.143 6.857L6.857 8.143 9.214 10.5l-1.5 1.5H12V7.714l-1.5 1.5zM4.286 0H0v4.286l1.5-1.5 2.357 2.357 1.286-1.286L2.786 1.5z"
+        >
+        </path>
+      </g>
+    </symbol>
+  </svg>
+</div>
+
+<script>
+  const gallery = document.getElementById("gallery")!;
+  const openBtn = document.getElementById("gallery-button-open")!;
+  const closeBtn = document.getElementById("gallery-button-close")!;
+
+  openBtn!.addEventListener("click", () => {
+    document.body.classList.add("no-scroll");
+    gallery.classList.add("opened");
+  });
+
+  closeBtn!.addEventListener("click", () => {
+    gallery.classList.remove("opened");
+    document.body.classList.remove("no-scroll");
+  });
+</script>
+
+<style>
+  .gallery {
+    position: fixed;
+    inset: 0;
+    background-color: rgb(0 0 0 / 0.8539);
+    z-index: 1000;
+
+    opacity: 1;
+    pointer-events: all;
+
+    transition: opacity 0.2s;
+
+    display: grid;
+  }
+
+  .gallery:not(.opened) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .gallery__container {
+    --padding-inline: 1.5rem;
+    max-width: calc(100% - 2 * var(--padding-inline));
+    margin: auto;
+
+    @media (min-width: 48em) {
+      --padding-inline: 3rem;
+      margin-block: auto;
+    }
+
+    @media (min-width: 48em) {
+      --padding-inline: 3rem;
+    }
+  }
+
+  .gallery__group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @media (min-width: 48em) {
+      gap: 2rem;
+    }
+  }
+
+  .gallery__close {
+    font-size: 0.875rem;
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.0178571428571429em;
+    line-height: 2;
+    color: var(--color-neutral-0);
+    padding-inline: 0.5em 1em;
+    margin-inline-end: -1em;
+    text-transform: uppercase;
+    align-self: flex-end;
+  }
+
+  .gallery__image {
+    width: 100%;
+    object-fit: contain;
+    max-height: 65vh;
+  }
+
+  .hero {
+    display: grid;
+
+    @media (min-width: 48em) {
+      grid-template-columns: 243px 160px 72px 28px 1fr;
+      grid-template-rows: auto 1fr;
+    }
+  }
+
+  .hero__painting {
+    aspect-ratio: 1.168;
+    position: relative;
+
+    @media (min-width: 48em) {
+      aspect-ratio: unset;
+      height: 35rem;
+      grid-column: 1 / 4;
+      grid-row: 1 / 3;
+    }
+  }
+
+  .hero__view-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+
+    @media (min-width: 48em) {
+      top: unset;
+      bottom: 1rem;
+    }
+  }
+
+  .hero__view-button {
+    height: 2.5rem;
+    padding-inline: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    gap: 1rem;
+
+    background-color: var(--color-neutral-900);
+    color: var(--color-neutral-0);
+
+    font-size: 0.625rem;
+    font-weight: var(--fw-bold);
+    line-height: 1.2;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+
+    > svg {
+      width: 0.75rem;
+      height: 0.75rem;
+    }
+
+    > span {
+      padding-block-start: 0.1325443786982249em;
+    }
+  }
+
+  .hero__body {
+    margin-block-start: -3.5rem;
+
+    background-color: var(--color-neutral-0);
+    width: max(17.625rem, 60%);
+    padding: 1.4rem 1.5rem;
+
+    @media (min-width: 48em) {
+      margin-block-start: 0;
+
+      width: 27.8125rem;
+      padding: 0 0 4rem 4rem;
+      margin-left: auto;
+
+      grid-column: 2 / -1;
+      grid-row: 1 / 2;
+    }
+
+    @media (min-width: 90em) {
+      grid-column: 3 / -1;
+    }
+  }
+
+  .hero__body {
+    z-index: 1;
+  }
+
+  .hero__title {
+    margin-block-end: 0.5rem;
+
+    font-weight: var(--fw-bold);
+    font-size: 1.5rem;
+    line-height: 1.25;
+    text-wrap: balance;
+    color: var(--color-neutral-900);
+
+    @media (min-width: 48em) {
+      margin-block-end: 1.5rem;
+
+      font-size: 3.5rem;
+      line-height: 1.15;
+    }
+  }
+
+  .hero__artist {
+    font-size: 0.9375rem;
+    line-height: 1.35;
+  }
+
+  .hero__portrait {
+    margin-inline-start: 1rem;
+    aspect-ratio: 1;
+    width: 4rem;
+
+    @media (min-width: 48em) {
+      margin-inline-start: 0;
+      width: 8rem;
+
+      grid-column: 5 / 6;
+      grid-row: 2 / 3;
+    }
+
+    @media (min-width: 90em) {
+      align-self: flex-end;
+      transform: translateY(50%);
+    }
+  }
+</style>

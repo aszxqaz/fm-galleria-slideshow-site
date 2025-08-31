@@ -1,0 +1,232 @@
+---
+import Header from "../components/Header.astro";
+import Thumbnail from "../components/Thumbnail.astro";
+import paintings from "../data";
+import PageLayout from "../layouts/PageLayout.astro";
+import { formHref } from "../util";
+
+const pageTitle = "Frontend Mentor | Galleria slideshow site";
+---
+
+<PageLayout pageTitle={pageTitle}>
+  <Header>
+    <a
+      href={formHref(paintings[0].slug)}
+      class="header__anchor text-button text-button--mq">Start slideshow</a
+    >
+  </Header>
+  <main class="container block-spacing">
+    <div class="row">
+      <div class="col col--mobile">
+        <div class="col col--tablet">
+          <div class="col col--desktop">
+            <Thumbnail data-astro-prefetch painting={paintings[0]} />
+            <Thumbnail data-astro-prefetch painting={paintings[4]} />
+            <Thumbnail data-astro-prefetch painting={paintings[8]} />
+            <Thumbnail data-astro-prefetch painting={paintings[11]} />
+          </div>
+          <div class="col col--desktop csd-3">
+            <Thumbnail
+              data-astro-prefetch
+              class:list="rst-2 rsm-3"
+              painting={paintings[2]}
+            />
+            <Thumbnail
+              data-astro-prefetch
+              class="rst-4 rsm-7"
+              painting={paintings[6]}
+            />
+            <Thumbnail data-astro-prefetch painting={paintings[13]} />
+          </div>
+        </div>
+
+        <div class="col col--tablet">
+          <div class="col col--desktop">
+            <Thumbnail
+              data-astro-prefetch
+              class="rsm-2"
+              painting={paintings[1]}
+            />
+            <Thumbnail
+              data-astro-prefetch
+              class="rsm-6"
+              painting={paintings[5]}
+            />
+            <Thumbnail
+              data-astro-prefetch
+              class="rsm-10"
+              painting={paintings[9]}
+            />
+            <Thumbnail
+              data-astro-prefetch
+              class="rsm-13"
+              painting={paintings[12]}
+            />
+          </div>
+
+          <div class="col col--desktop">
+            <Thumbnail
+              data-astro-prefetch
+              class="rst-2 rsm-4"
+              painting={paintings[3]}
+            />
+            <Thumbnail
+              data-astro-prefetch
+              class="rst-4 rsm-8"
+              painting={paintings[7]}
+            />
+            <Thumbnail
+              data-astro-prefetch
+              class="rst-6 rsm-11"
+              painting={paintings[10]}
+            />
+            <Thumbnail data-astro-prefetch painting={paintings[14]} />
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</PageLayout>
+
+<style>
+  .header__anchor {
+    margin-inline-end: -1em;
+  }
+
+  .block-spacing {
+    margin-block: 1.5rem 3.4375rem;
+
+    @media (min-width: 48em) {
+      margin-block: 2.625rem 2.5rem;
+    }
+
+    @media (min-width: 90em) {
+      margin-block: 2.5rem 2.9375rem;
+    }
+  }
+
+  .container {
+    --padding-inline: 2rem;
+    --max-width: 350px;
+
+    margin-inline: auto;
+    max-width: min(var(--max-width), 100% - 2 * var(--padding-inline));
+
+    @media (min-width: 48em) {
+      --padding-inline: 3.375rem;
+      --max-width: 750px;
+    }
+
+    @media (min-width: 90em) {
+      --padding-inline: 2.5rem;
+      --max-width: 1500px;
+    }
+  }
+
+  .row {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 2.5rem;
+  }
+
+  .col {
+    display: grid;
+    row-gap: 2.5rem;
+  }
+
+  .col--mobile {
+    @media not (max-width: calc(48em - 1px)) {
+      display: contents;
+    }
+  }
+
+  .col--tablet {
+    @media (min-width: 90em) or (max-width: calc(48em - 1px)) {
+      display: contents;
+    }
+  }
+
+  .col--desktop {
+    @media not (min-width: 90em) {
+      display: contents;
+    }
+  }
+
+  .csd-3 {
+    @media (min-width: 90em) {
+      grid-column-start: 3;
+    }
+  }
+
+  .rst-2 {
+    @media (min-width: 48em) and (max-width: 90em) {
+      grid-row-start: 2;
+    }
+  }
+
+  .rst-4 {
+    @media (min-width: 48em) and (max-width: 90em) {
+      grid-row-start: 4;
+    }
+  }
+
+  .rst-6 {
+    @media (min-width: 48em) and (max-width: 90em) {
+      grid-row-start: 6;
+    }
+  }
+
+  .rsm-2 {
+    @media (max-width: calc(48em - 1px)) {
+      grid-row-start: 2;
+    }
+  }
+
+  .rsm-3 {
+    @media (max-width: calc(48em - 1px)) {
+      grid-row-start: 3;
+    }
+  }
+
+  .rsm-4 {
+    @media (max-width: calc(48em - 1px)) {
+      grid-row-start: 4;
+    }
+  }
+
+  .rsm-6 {
+    @media (max-width: calc(48em - 1px)) {
+      grid-row-start: 6;
+    }
+  }
+
+  .rsm-7 {
+    @media (max-width: calc(48em - 1px)) {
+      grid-row-start: 7;
+    }
+  }
+
+  .rsm-8 {
+    @media (max-width: calc(48em - 1px)) {
+      grid-row-start: 8;
+    }
+  }
+
+  .rsm-10 {
+    @media (max-width: calc(48em - 1px)) {
+      grid-row-start: 10;
+    }
+  }
+
+  .rsm-11 {
+    @media (max-width: calc(48em - 1px)) {
+      grid-row-start: 11;
+    }
+  }
+
+  .rsm-13 {
+    @media (max-width: calc(48em - 1px)) {
+      grid-row-start: 13;
+    }
+  }
+</style>

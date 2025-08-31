@@ -1,0 +1,23 @@
+.text-button {
+  font-size: 0.5625rem;
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+  letter-spacing: 0.2222222222222222em;
+  text-transform: uppercase;
+  padding: 0.5em 1em;
+  color: var(--color-neutral-400);
+  transition: color 0.3s;
+
+  @media (hover: hover) {
+    &:not(:disabled):not(.disabled):hover {
+      color: var(--color-neutral-900);
+    }
+  }
+}
+
+.text-button--mq {
+  @media (min-width: 48em) {
+    font-size: 0.75rem;
+    letter-spacing: 0.2141666666666667em;
+  }
+}

@@ -1,0 +1,86 @@
+---
+import type { Painting } from "../data";
+import { formHref } from "../util";
+
+interface Props {
+  painting: Painting;
+  class?: string;
+}
+
+const { painting, class: className, ...rest } = Astro.props;
+---
+
+<a
+  class:list={["thumbnail", className]}
+  href={formHref(painting.slug)}
+  {...rest}
+>
+  <img
+    class="thumbnail__image"
+    src={painting.images.thumbnail}
+    alt={painting.name}
+  />
+  <div class="thumbnail__content">
+    <h2 class="thumbnail__title">{painting.name}</h2>
+    <p class="thumbnail__artist">{painting.artist.name}</p>
+  </div>
+</a>
+
+<style>
+  .thumbnail {
+    position: relative;
+    isolation: isolate;
+
+    @media (hover: hover) {
+      &::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        background-color: rgb(255 255 255 / 0);
+        transition: background-color 0.3s;
+      }
+
+      &:hover::after {
+        background-color: rgb(255 255 255 / 0.45);
+      }
+    }
+  }
+
+  .thumbnail__image {
+    width: 100%;
+  }
+
+  .thumbnail__content {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 170px;
+
+    background-image: var(--thumbnail-overlay-gradient);
+    color: var(--color-neutral-0);
+    padding: 2rem;
+
+    display: grid;
+    align-content: flex-end;
+    gap: 0.5rem;
+
+    user-select: none;
+  }
+
+  .thumbnail__title {
+    font-weight: var(--fw-bold);
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
+  .thumbnail__artist {
+    font-weight: var(--fw-regular);
+    font-size: 0.8125rem;
+    line-height: 1.25;
+
+    opacity: 0.7528;
+  }
+</style>

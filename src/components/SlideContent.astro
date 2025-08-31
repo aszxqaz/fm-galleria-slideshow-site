@@ -1,0 +1,83 @@
+---
+import type { Painting } from "../data";
+
+type Props = {
+  data: Painting;
+};
+
+const { data } = Astro.props;
+---
+
+<div class="content">
+  <p class="content__text">{data.description}</p>
+  <a href={data.source} target="_blank" class="content__anchor text-button"
+    >Go to source</a
+  >
+  <span class="content__year">{data.year}</span>
+</div>
+
+<style>
+  .content {
+    position: relative;
+
+    margin-block-start: -2.75rem;
+    padding-block-start: 4rem;
+    max-width: 28.5625rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    @media (min-width: 48em) {
+      margin-block-start: 4rem;
+      padding-block-start: 4.625rem;
+      padding-inline: 16.86046511627907%;
+
+      max-width: 848px;
+    }
+
+    @media (min-width: 90em) {
+      margin-block-start: unset;
+      padding-block-start: 6.875rem;
+      padding-inline-start: 0;
+      padding-inline-end: 7.875rem;
+
+      max-width: 29.75rem;
+
+      justify-content: space-between;
+    }
+  }
+
+  .content__text {
+    font-size: 0.875rem;
+    font-weight: var(--fw-bold);
+    line-height: 2;
+    letter-spacing: -0.0178571428571429em;
+  }
+
+  .content__anchor {
+    margin-inline-start: -1em;
+  }
+
+  .content__year {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+
+    font-size: 6.25rem;
+    font-weight: var(--fw-bold);
+    line-height: 1;
+    color: var(--color-neutral-100);
+    user-select: none;
+
+    @media (min-width: 48em) {
+      left: 0;
+      top: 0;
+
+      font-size: 12.5rem;
+      letter-spacing: -0.001em;
+      line-height: 1.15;
+    }
+  }
+</style>

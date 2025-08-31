@@ -1,0 +1,115 @@
+---
+import { getImage } from "astro:assets";
+import Header from "../components/Header.astro";
+import SlideContent from "../components/SlideContent.astro";
+import SlideControls from "../components/SlideControls.astro";
+import SlideHero from "../components/SlideHero.astro";
+import paintings from "../data";
+import PageLayout from "../layouts/PageLayout.astro";
+import { formHref } from "../util";
+
+export async function getStaticPaths() {
+  return paintings.map((painting, i) => ({
+    params: {
+      slug: painting.slug,
+    },
+  }));
+}
+
+const data = paintings.find((painting) => painting.slug == Astro.params.slug)!;
+const pageTitle = `Frontend Mentor | Galleria slideshow site`;
+---
+
+<PageLayout pageTitle={pageTitle}>
+  <Fragment slot="head">
+    {
+      data.next ? (
+        <Fragment>
+          <link rel="prefetch" href={data.next.images.hero.large} as="image" />
+          <link rel="prefetch" href={data.next.images.hero.small} as="image" />
+        </Fragment>
+      ) : null
+    }
+    {
+      data.prev ? (
+        <Fragment>
+          <link rel="prefetch" href={data.prev.images.hero.large} as="image" />
+          <link rel="prefetch" href={data.prev.images.hero.small} as="image" />
+        </Fragment>
+      ) : null
+    }
+  </Fragment>
+  <Header>
+    <a href={formHref("")} class="header__anchor text-button text-button--mq"
+      >Stop slideshow</a
+    >
+  </Header>
+  <main class="details bottom-spacing">
+    <SlideHero data={data} />
+    <SlideContent data={data} />
+  </main>
+  <SlideControls data={data} />
+</PageLayout>
+
+<style>
+  .header__anchor {
+    margin-inline-end: -1em;
+  }
+
+  .details {
+    --padding-inline: clamp(1.5rem, -0.885rem + 10.178vw, 4rem);
+
+    margin-inline: auto;
+    max-width: min(var(--max-width, 9999rem), 100% - 2 * var(--padding-inline));
+
+    @media (min-width: 48em) {
+      --padding-inline: 2.5rem;
+      --max-width: 53rem;
+    }
+
+    @media (min-width: 90em) {
+      --max-width: 85rem;
+    }
+  }
+
+  /* layout */
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (min-width: 48em) {
+      align-items: stretch;
+    }
+
+    @media (min-width: 90em) {
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: center;
+      gap: 2.25rem;
+    }
+  }
+
+  /* spacing */
+
+  .details {
+    margin-block-start: 1.5rem;
+
+    @media (min-width: 48em) {
+      margin-block-start: 2.5rem;
+    }
+
+    @media (min-width: 90em) {
+      margin-block-start: 6rem;
+    }
+  }
+
+  .bottom-spacing {
+    margin-block-end: 9rem;
+
+    @media (min-width: 48em) {
+      margin-block-end: 9rem;
+    }
+  }
+</style>

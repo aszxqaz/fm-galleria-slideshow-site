@@ -1,0 +1,27 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "../styles/global/global.css";
+
+const { pageTitle } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <slot name="head" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
