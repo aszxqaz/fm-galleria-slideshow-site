@@ -22,6 +22,15 @@ const { pageTitle } = Astro.props;
     <ClientRouter />
   </head>
   <body>
-    <slot />
+    <div class="page-wrapper">
+      <slot />
+    </div>
   </body>
 </html>
+
+<style>
+  .page-wrapper {
+    background-color: var(--color-neutral-0);
+    min-height: 100%;
+  }
+</style>

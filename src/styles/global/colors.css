@@ -15,9 +15,5 @@
 
 body {
   color: var(--color-neutral-400);
-  background-color: var(--color-neutral-0);
-}
-
-.color-overlay {
-  color: var(--color-modal-overlay);
+  background-color: var(--color-neutral-900);
 }

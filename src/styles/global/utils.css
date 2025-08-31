@@ -20,7 +20,3 @@
 .no-scroll {
   overflow: hidden;
 }
-
-.dark {
-  background-color: var(--color-neutral-900);
-}
